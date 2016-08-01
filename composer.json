@@ -3,11 +3,6 @@
   "bin": ["bin/hexlet-psr-linter"],
   "type": "library",
   "description": "PHP linter",
-  "require-dev": {
-    "phpunit/phpunit": "^5.2",
-    "squizlabs/php_codesniffer": "2.*",
-    "codeclimate/php-test-reporter": "dev-master"
-  },
   "authors": [
     {
       "name": "Viacheslav Kliuev",
@@ -19,5 +14,10 @@
       "PSRLinter\\": "src/"
     }
   },
-  "require": {}
+  "require": {},
+  "require-dev": {
+    "phpunit/phpunit": "^5.2",
+    "squizlabs/php_codesniffer": "2.*",
+    "codeclimate/php-test-reporter": "dev-master"
+  }
 }
