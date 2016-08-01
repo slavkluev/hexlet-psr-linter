@@ -1,0 +1,23 @@
+{
+  "name": "slavkluev/hexlet-psr-linter",
+  "bin": ["bin/hexlet-psr-linter"],
+  "type": "library",
+  "description": "PHP linter",
+  "require-dev": {
+    "phpunit/phpunit": "^5.2",
+    "squizlabs/php_codesniffer": "2.*",
+    "codeclimate/php-test-reporter": "dev-master"
+  },
+  "authors": [
+    {
+      "name": "Viacheslav Kliuev",
+      "email": "slavkluev@yandex.ru"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "PSRLinter\\": "src/"
+    }
+  },
+  "require": {}
+}
