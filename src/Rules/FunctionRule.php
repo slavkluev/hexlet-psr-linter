@@ -12,10 +12,12 @@ class FunctionRule implements RuleInterface
     {
         if ($node instanceof Node\Stmt\Function_) {
             if (!\PHP_CodeSniffer::isCamelCaps($node->name)) {
-                return new Error($node->name,
+                return new Error(
+                    $node->name,
                     "Function name is not in camel case format",
                     Error::ERROR,
-                    $node->getLine());
+                    $node->getLine()
+                );
             }
         }
     }

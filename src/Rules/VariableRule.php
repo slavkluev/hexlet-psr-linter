@@ -12,10 +12,12 @@ class VariableRule implements RuleInterface
     {
         if ($node instanceof Node\Expr\Variable) {
             if (!\PHP_CodeSniffer::isCamelCaps($node->name)) {
-                return new Error("$node->name",
+                return new Error(
+                    "$node->name",
                     "Variable name is not in camel case format",
                     Error::WARNING,
-                    $node->getLine());
+                    $node->getLine()
+                );
             }
         }
     }

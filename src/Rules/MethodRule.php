@@ -15,10 +15,12 @@ class MethodRule implements RuleInterface
     {
         if ($node instanceof Node\Stmt\ClassMethod) {
             if (!\PHP_CodeSniffer::isCamelCaps($node->name) && !in_array($node->name, self::$magicFunction)) {
-                return new Error("$node->name",
+                return new Error(
+                    "$node->name",
                     "Method name is not in camel case format",
                     Error::ERROR,
-                    $node->getLine());
+                    $node->getLine()
+                );
             }
         }
     }
