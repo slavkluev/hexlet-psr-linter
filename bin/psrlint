@@ -1,7 +1,16 @@
 #!/usr/bin/env php
-
 <?php
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use PSRLinter;
+use PSRLinter\Linter;
+
+$cmd = new Commando\Command();
+
+$cmd->option()
+    ->require()
+    ->describedAs('File or directory');
+
+$linter = new Linter();
+$linter->run($cmd);
+
