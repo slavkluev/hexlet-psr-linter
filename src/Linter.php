@@ -77,7 +77,10 @@ class Linter
         if ($countOfProblems == 0) {
             $this->cli->green("Problems have not been detected.");
         } else {
-            $this->cli->red(sprintf("%d problems (%d errors, %d warnings)", $countOfProblems, $countOfErrors, $countOfWarnings));
+            $this->cli->red(sprintf("%d problems (%d errors, %d warnings)",
+                $countOfProblems,
+                $countOfErrors,
+                $countOfWarnings));
         }
     }
 }

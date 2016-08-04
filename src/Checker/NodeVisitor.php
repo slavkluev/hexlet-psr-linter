@@ -30,5 +30,4 @@ class NodeVisitor extends NodeVisitorAbstract
     {
         return $this->logger;
     }
-
 }
