@@ -1,22 +1,22 @@
 <?php
 
-namespace PSRLinter\Tests\Logger;
+namespace PSRLinter\Tests\Report;
 
-use PSRLinter\Logger\Error;
-use PSRLinter\Logger\Logger;
+use PSRLinter\Report\Error;
+use PSRLinter\Report\Report;
 
-class LoggerTest extends \PHPUnit_Framework_TestCase
+class ReportTest extends \PHPUnit_Framework_TestCase
 {
     private $logger;
     private $errors = [];
 
     public function setUp()
     {
-        $this->logger = new Logger();
+        $this->logger = new Report();
 
-        $this->errors[] = new Error("test", "", Error::WARNING, 1);
-        $this->errors[] = new Error("test", "", Error::ERROR, 1);
-        $this->errors[] = new Error("test", "", Error::WARNING, 1);
+        $this->errors[] = new Error("test", "", Error::LEVEL_WARNING, 1);
+        $this->errors[] = new Error("test", "", Error::LEVEL_ERROR, 1);
+        $this->errors[] = new Error("test", "", Error::LEVEL_WARNING, 1);
 
         foreach ($this->errors as $error) {
             $this->logger->addError($error);

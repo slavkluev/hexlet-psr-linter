@@ -1,33 +1,34 @@
 <?php
 
-namespace PSRLinter\Checker;
+namespace PSRLinter\Visitors;
 
 use PhpParser\Node;
 use PhpParser\NodeVisitorAbstract;
-use PSRLinter\Logger\Logger;
+use PSRLinter\Report\Report;
+use PSRLinter\RuleInterface;
 
 class NodeVisitor extends NodeVisitorAbstract
 {
     private $rules;
-    private $logger;
+    private $report;
 
     public function __construct($rules)
     {
         $this->rules = $rules;
-        $this->logger = new Logger();
+        $this->report = new Report();
     }
 
     public function enterNode(Node $node)
     {
         foreach ($this->rules as $rule) {
-            if ($error = $rule($node)) {
-                $this->logger->addError($error);
+            if ($error = $rule->check($node)) {
+                $this->report->addError($error);
             }
         }
     }
 
-    public function getLogger()
+    public function getReport()
     {
-        return $this->logger;
+        return $this->report;
     }
 }

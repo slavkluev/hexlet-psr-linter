@@ -1,8 +1,8 @@
 <?php
 
-namespace PSRLinter\Logger;
+namespace PSRLinter\Report;
 
-class Logger
+class Report
 {
     private $errors;
 
@@ -25,7 +25,7 @@ class Logger
     {
         return count(
             array_filter($this->errors, function ($item) {
-                return ($item->getType() == Error::WARNING);
+                return ($item->getType() == Error::LEVEL_WARNING);
             })
         );
     }
@@ -34,7 +34,7 @@ class Logger
     {
         return count(
             array_filter($this->errors, function ($item) {
-                return ($item->getType() == Error::ERROR);
+                return ($item->getType() == Error::LEVEL_ERROR);
             })
         );
     }

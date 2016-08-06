@@ -3,7 +3,11 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use PSRLinter\Linter;
+use PSRLinter\FileLinter;
+use PSRLinter\ReportBuilder\ReportBuilder;
+use PSRLinter\Exceptions\EmptyListOfFiles;
+use PSRLinter\Exceptions\UnexpectedFormatReporter;
+use \League\CLImate\CLImate;
 
 $cmd = new Commando\Command();
 
@@ -11,6 +15,27 @@ $cmd->option()
     ->require()
     ->describedAs('File or directory');
 
-$linter = new Linter();
-$linter->run($cmd);
+$cmd->option('f')
+    ->aka('format')
+    ->must(function($format) {
+        $formats = array('txt', 'json', 'yml');
+        return in_array($format, $formats);
+    });
+
+$path = $cmd[0];
+$format = $cmd['format'];
+
+$cli = new CLImate();
+try {
+    $linter = new FileLinter();
+    $reporter = new ReportBuilder($format);
+    $cli->out($reporter->build($linter->lint($path)));
+    exit(0);
+} catch (EmptyListOfFiles $e){
+    $cli->out("Файлов не обнаружено.");
+    exit(1);
+} catch (UnexpectedFormatReporter $e){
+    $cli->out("Неверный формат вывода.");
+    exit(1);
+}
 

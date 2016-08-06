@@ -1,11 +1,11 @@
 <?php
 
-namespace PSRLinter\Logger;
+namespace PSRLinter\Report;
 
 class Error
 {
-    const WARNING = "warning";
-    const ERROR = "error";
+    const LEVEL_WARNING = "warning";
+    const LEVEL_ERROR = "error";
 
     private $title;
     private $description;
