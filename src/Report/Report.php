@@ -41,6 +41,6 @@ class Report
 
     public function getCountOfProblems()
     {
-        return self::getCountOfErrors() + self::getCountOfWarnings();
+        return count($this->errors);
     }
 }
