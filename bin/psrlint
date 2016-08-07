@@ -17,6 +17,7 @@ $cmd->option()
 
 $cmd->option('f')
     ->aka('format')
+    ->default('txt')
     ->must(function($format) {
         $formats = array('txt', 'json', 'yml');
         return in_array($format, $formats);

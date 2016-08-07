@@ -20,7 +20,12 @@ class NodeVisitorTest extends \PHPUnit_Framework_TestCase
     public function testCheckNode()
     {
         $node = new Stmt\Function_("Myfunction");
-        $error = new Error("Myfunction", "Function name is not in camel case format", Error::LEVEL_ERROR, -1);
+        $error = new Error(
+            "Myfunction",
+            "Function name is not in camel case format",
+            Error::LEVEL_ERROR,
+            -1
+        );
         $this->visitor->enterNode($node);
 
         $this->assertEquals([$error], $this->visitor->getReport()->getErrors());

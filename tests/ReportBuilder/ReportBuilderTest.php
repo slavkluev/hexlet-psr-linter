@@ -12,7 +12,7 @@ class ReportBuilderTest extends \PHPUnit_Framework_TestCase
         try {
             new ReportBuilder('test');
             $this->fail();
-        } catch (UnexpectedFormatReporter $e){
+        } catch (UnexpectedFormatReporter $e) {
         }
     }
 
@@ -20,7 +20,7 @@ class ReportBuilderTest extends \PHPUnit_Framework_TestCase
     {
         try {
             new ReportBuilder('txt');
-        } catch (UnexpectedFormatReporter $e){
+        } catch (UnexpectedFormatReporter $e) {
             $this->fail();
         }
     }

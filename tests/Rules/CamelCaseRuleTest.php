@@ -26,7 +26,12 @@ class CamelCaseRuleTest extends \PHPUnit_Framework_TestCase
 
     public function testFunctionError()
     {
-        $error = new Error("Myfunction", "Function name is not in camel case format", Error::LEVEL_ERROR, -1);
+        $error = new Error(
+            "Myfunction",
+            "Function name is not in camel case format",
+            Error::LEVEL_ERROR,
+            -1
+        );
         $this->assertEquals($error, $this->rule->check(new Stmt\Function_("Myfunction")));
     }
 
@@ -40,7 +45,12 @@ class CamelCaseRuleTest extends \PHPUnit_Framework_TestCase
 
     public function testMethodError()
     {
-        $error = new Error("Myfunction", "Method name is not in camel case format", Error::LEVEL_ERROR, -1);
+        $error = new Error(
+            "Myfunction",
+            "Method name is not in camel case format",
+            Error::LEVEL_ERROR,
+            -1
+        );
         $this->assertEquals($error, $this->rule->check(new Stmt\ClassMethod("Myfunction")));
     }
 
@@ -61,7 +71,12 @@ class CamelCaseRuleTest extends \PHPUnit_Framework_TestCase
 
     public function testVariableError()
     {
-        $error = new Error("my_var", "Variable name is not in camel case format", Error::LEVEL_WARNING, -1);
+        $error = new Error(
+            "my_var",
+            "Variable name is not in camel case format",
+            Error::LEVEL_WARNING,
+            -1
+        );
         $this->assertEquals($error, $this->rule->check(new Variable("my_var")));
     }
 }

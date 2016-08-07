@@ -2,7 +2,6 @@
 
 namespace PSRLinter\Tests;
 
-
 use PSRLinter\Exceptions\CodeErrorException;
 use PSRLinter\Linter;
 use PSRLinter\Report\Error;
