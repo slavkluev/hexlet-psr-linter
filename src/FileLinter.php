@@ -15,7 +15,6 @@ class FileLinter
 
     public function lint($path)
     {
-
         $reports = [];
         $files = $this->getFiles($path);
         foreach ($files as $file) {

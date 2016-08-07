@@ -5,7 +5,6 @@ namespace PSRLinter\Visitors;
 use PhpParser\Node;
 use PhpParser\NodeVisitorAbstract;
 use PSRLinter\Report\Report;
-use PSRLinter\RuleInterface;
 
 class NodeVisitor extends NodeVisitorAbstract
 {

@@ -4,9 +4,7 @@ namespace PSRLinter;
 
 use PhpParser\NodeTraverser;
 use PhpParser\ParserFactory;
-use PSRLinter\Rules\FunctionRule;
 use PSRLinter\Rules\CamelCaseRule;
-use PSRLinter\Rules\VariableRule;
 use PSRLinter\Visitors\NodeVisitor;
 use PSRLinter\Report\Report;
 

@@ -2,12 +2,19 @@
 
 namespace PSRLinter\Tests\Fixtures;
 
-class Bad {
+$my_var = 1;
+$MyVAr = 3;
 
-    private $my_var;
+class Bad {
 
     function MyFunction()
     {
-
     }
+
+    function my_function()
+    {
+    }
+}
+
+function test_test() {
 }
