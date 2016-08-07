@@ -12,7 +12,7 @@ class ReportJson implements ReportTypeInterface
 
         $result = [];
         foreach ($reports as $file => $report) {
-            $result[$file] = array_map(function($error) {
+            $result[$file] = array_map(function ($error) {
                 return [
                     "line" => $error->getLine(),
                     "level" => $error->getType(),
