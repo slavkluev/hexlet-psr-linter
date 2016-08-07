@@ -2,17 +2,31 @@
 
 namespace PSRLinter;
 
+use PhpParser\NodeTraverser;
+use PhpParser\ParserFactory;
+use PSRLinter\Rules\CamelCaseRule;
+use PSRLinter\Visitors\NodeVisitor;
+use PSRLinter\Report\Report;
+
 class Linter
 {
-    private $name;
-
-    public function __construct($name)
+    public function lint($code) : Report
     {
-        $this->name = $name;
+        $parser = (new ParserFactory)->create(ParserFactory::PREFER_PHP7);
+        $traverser = new NodeTraverser;
+        $visitor = new NodeVisitor($this->getRules());
+        $traverser->addVisitor($visitor);
+        $stmts = $parser->parse($code);
+        $traverser->traverse($stmts);
+        $report = $visitor->getReport();
+        return $report;
     }
 
-    public function getName()
+    private function getRules()
     {
-        return $this->name;
+        $rules = [
+            new CamelCaseRule()
+        ];
+        return $rules;
     }
 }

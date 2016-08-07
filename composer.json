@@ -1,6 +1,6 @@
 {
   "name": "slavkluev/hexlet-psr-linter",
-  "bin": ["bin/hexlet-psr-linter"],
+  "bin": ["bin/psrlint"],
   "type": "library",
   "description": "PHP linter",
   "authors": [
@@ -14,7 +14,11 @@
       "PSRLinter\\": "src/"
     }
   },
-  "require": {},
+  "require": {
+    "nikic/php-parser": "dev-master",
+    "nategood/commando": "*",
+    "league/climate": "*"
+  },
   "require-dev": {
     "phpunit/phpunit": "^5.2",
     "squizlabs/php_codesniffer": "2.*",
