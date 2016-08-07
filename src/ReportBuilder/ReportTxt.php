@@ -28,7 +28,7 @@ class ReportTxt implements ReportTypeInterface
 
     private function buildErrors(Report $report)
     {
-        $errorsArray = array_map( function(Error $error) {
+        $errorsArray = array_map(function (Error $error) {
             return sprintf(
                 "%-7s%-10s%-45s%-20s",
                 $error->getLine(),
