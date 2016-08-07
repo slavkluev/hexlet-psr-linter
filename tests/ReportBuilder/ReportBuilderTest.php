@@ -9,11 +9,8 @@ class ReportBuilderTest extends \PHPUnit_Framework_TestCase
 {
     public function testUnexpectedFormatReporterException()
     {
-        try {
-            new ReportBuilder('test');
-            $this->fail();
-        } catch (UnexpectedFormatReporter $e) {
-        }
+        $this->expectException(UnexpectedFormatReporter::class);
+        new ReportBuilder('test');
     }
 
     public function testTxtFormatNotException()
