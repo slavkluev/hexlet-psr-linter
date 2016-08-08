@@ -6,6 +6,7 @@ class Error
 {
     const LEVEL_WARNING = "warning";
     const LEVEL_ERROR = "error";
+    const LEVEL_INFO = "info";
 
     private $title;
     private $description;

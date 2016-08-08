@@ -30,7 +30,7 @@ class ReportTxt implements ReportTypeInterface
     {
         $errorsArray = array_map(function (Error $error) {
             return sprintf(
-                "%-7s%-10s%-45s%-20s",
+                "%-7s%-10s%-55s%-20s",
                 $error->getLine(),
                 $error->getType(),
                 $error->getDescription(),

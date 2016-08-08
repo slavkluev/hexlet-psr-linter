@@ -6,7 +6,7 @@ use PhpParser\Node;
 use PhpParser\NodeVisitorAbstract;
 use PSRLinter\Report\Report;
 
-class NodeVisitor extends NodeVisitorAbstract
+class NodeConverter extends NodeVisitorAbstract
 {
     private $rules;
 
@@ -15,10 +15,14 @@ class NodeVisitor extends NodeVisitorAbstract
         $this->rules = $rules;
     }
 
-    public function enterNode(Node $node)
+    public function leaveNode(Node $node)
     {
         foreach ($this->rules as $rule) {
-            $rule->check($node);
+            if ($rule->isFixable($node)) {
+                return $rule->fix($node);
+            } else {
+                $rule->check($node);
+            }
         }
     }
 

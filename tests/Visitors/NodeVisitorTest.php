@@ -2,7 +2,7 @@
 
 namespace PSRLinter\Tests\Visitors;
 
-use PSRLinter\Rules\CamelCaseRule;
+use PSRLinter\Rules\CamelCase;
 use PSRLinter\Visitors\NodeVisitor;
 use PhpParser\Node\Stmt;
 use PSRLinter\Report\Error;
@@ -13,7 +13,7 @@ class NodeVisitorTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $rules = [new CamelCaseRule()];
+        $rules = [new CamelCase()];
         $this->visitor = new NodeVisitor($rules);
     }
 
@@ -22,7 +22,7 @@ class NodeVisitorTest extends \PHPUnit_Framework_TestCase
         $node = new Stmt\Function_("Myfunction");
         $error = new Error(
             "Myfunction",
-            "Function name is not in camel case format",
+            "Function name is not in camel case.",
             Error::LEVEL_ERROR,
             -1
         );

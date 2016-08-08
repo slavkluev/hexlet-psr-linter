@@ -24,6 +24,18 @@ class FileLinter
         return $reports;
     }
 
+    public function fix($path)
+    {
+        $reports = [];
+        $files = $this->getFiles($path);
+        foreach ($files as $file) {
+            $code = file_get_contents($file);
+            list($code, $reports[$file]) = $this->linter->fix($code);
+            file_put_contents($file, $code);
+        }
+        return $reports;
+    }
+
     private function getFiles($dir)
     {
         $files = [];

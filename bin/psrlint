@@ -23,20 +23,26 @@ $cmd->option('f')
         return in_array($format, $formats);
     });
 
+$cmd->option('fix')
+    ->describedAs('Fix errors')
+    ->boolean();
+
 $path = $cmd[0];
 $format = $cmd['format'];
+$fix = $cmd['fix'];
 
 $cli = new CLImate();
 try {
     $linter = new FileLinter();
     $reporter = new ReportBuilder($format);
-    $cli->out($reporter->build($linter->lint($path)));
+    $reports = $fix ? $linter->fix($path) : $linter->lint($path);
+    $cli->out($reporter->build($reports));
     exit(0);
 } catch (EmptyListOfFiles $e){
-    $cli->out("Файлов не обнаружено.");
+    $cli->out("1Файлов не обнаружено.");
     exit(1);
 } catch (UnexpectedFormatReporter $e){
-    $cli->out("Неверный формат вывода.");
+    $cli->out("2Неверный формат вывода.");
     exit(1);
 }
 
