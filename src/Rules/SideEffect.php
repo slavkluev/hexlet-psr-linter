@@ -32,7 +32,7 @@ class SideEffect implements RuleInterface
         }
     }
 
-    public function isFixable(Node $node)
+    public function isFixable(Node $node) : bool
     {
         return false;
     }

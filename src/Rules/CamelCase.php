@@ -75,7 +75,7 @@ class CamelCase implements RuleInterface
         return true;
     }
 
-    public function isFixable(Node $node)
+    public function isFixable(Node $node) : bool
     {
         return true;
     }
