@@ -39,10 +39,10 @@ try {
     $cli->out($reporter->build($reports));
     exit(0);
 } catch (EmptyListOfFiles $e){
-    $cli->out("1Файлов не обнаружено.");
+    $cli->out("Файлов не обнаружено.");
     exit(1);
 } catch (UnexpectedFormatReporter $e){
-    $cli->out("2Неверный формат вывода.");
+    $cli->out("Неверный формат вывода.");
     exit(1);
 }
 
