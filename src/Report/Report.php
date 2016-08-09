@@ -16,6 +16,13 @@ class Report
         $this->errors[] = $error;
     }
 
+    public function addReport(Report $report)
+    {
+        foreach ($report->getErrors() as $error) {
+            $this->errors[] = $error;
+        }
+    }
+
     public function getErrors(): array
     {
         return $this->errors;
@@ -41,6 +48,6 @@ class Report
 
     public function getCountOfProblems()
     {
-        return count($this->errors);
+        return $this->getCountOfErrors() + $this->getCountOfWarnings();
     }
 }

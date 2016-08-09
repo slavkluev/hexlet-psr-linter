@@ -18,3 +18,5 @@ class Bad {
 
 function test_test() {
 }
+
+echo "hjl";
