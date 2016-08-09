@@ -39,6 +39,7 @@ class SideEffect implements RuleInterface
 
     public function fix(Node $node) : Node
     {
+        return $node;
     }
 
     public function getReport(): Report
