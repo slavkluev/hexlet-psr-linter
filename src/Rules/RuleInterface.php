@@ -9,6 +9,6 @@ interface RuleInterface
 {
     public function check(Node $node);
     public function isFixable(Node $node);
-    public function fix(Node $node);
+    public function fix(Node $node) : Node;
     public function getReport() : Report;
 }

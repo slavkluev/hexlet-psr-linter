@@ -19,13 +19,16 @@ class SideEffect implements RuleInterface
     ];
     private $statementNodeFlag = false;
     private $sideEffectFlag = false;
+    private $endLine = 0;
 
     public function check(Node $node)
     {
-        if (in_array($node->getType(), $this->statementNodes)) {
+        if (in_array($node->getType(), $this->statementNodes) && $this->endLine < $node->getAttribute('endLine')) {
             $this->statementNodeFlag = true;
-        } elseif (in_array($node->getType(), $this->sideEffect)) {
+            $this->endLine = $node->getAttribute('endLine');
+        } elseif (in_array($node->getType(), $this->sideEffect) && $this->endLine < $node->getAttribute('endLine')) {
             $this->sideEffectFlag = true;
+            $this->endLine = $node->getAttribute('endLine');
         }
     }
 
@@ -34,7 +37,7 @@ class SideEffect implements RuleInterface
         return false;
     }
 
-    public function fix(Node $node)
+    public function fix(Node $node) : Node
     {
     }
 

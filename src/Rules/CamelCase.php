@@ -80,7 +80,7 @@ class CamelCase implements RuleInterface
         return true;
     }
 
-    public function fix(Node $node)
+    public function fix(Node $node) : Node
     {
         if ($node instanceof Node\Stmt\Function_) {
             if (!\PHP_CodeSniffer::isCamelCaps($node->name)) {
