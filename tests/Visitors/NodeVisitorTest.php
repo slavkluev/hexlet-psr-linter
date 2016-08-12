@@ -13,7 +13,7 @@ class NodeVisitorTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $rules = [new CamelCase()];
+        $rules = ["PSRLinter\\Rules\\CamelCase"];
         $this->visitor = new NodeVisitor($rules);
     }
 

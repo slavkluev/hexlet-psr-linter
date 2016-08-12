@@ -53,7 +53,7 @@ class LinterTest extends \PHPUnit_Framework_TestCase
         $expectedReport = new Report();
 
         $linter = new Linter();
-        list($c, $report) = $linter->fix($code);
+        $report = $linter->fix($code)[1];
 
         $this->assertEquals($expectedReport, $report);
     }
@@ -70,7 +70,7 @@ class LinterTest extends \PHPUnit_Framework_TestCase
         ));
 
         $linter = new Linter();
-        list($c, $report) = $linter->fix($code);
+        $report = $linter->fix($code)[1];
 
         $this->assertEquals($expectedReport, $report);
     }

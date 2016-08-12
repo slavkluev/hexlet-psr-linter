@@ -24,28 +24,38 @@ class Linter
 
     public function lint($code) : Report
     {
-        $parser = (new ParserFactory)->create(ParserFactory::PREFER_PHP7);
-        $traverser = new NodeTraverser;
+        $ast = $this->getAST($code);
         $visitor = new NodeVisitor($this->config["rules"]);
-        $traverser->addVisitor($visitor);
-        $stmts = $parser->parse($code);
-        $traverser->traverse($stmts);
+        $this->traverse($ast, [$visitor]);
         $report = $visitor->getReport();
         return $report;
     }
 
     public function fix($code)
     {
-        $parser = (new ParserFactory)->create(ParserFactory::PREFER_PHP7);
-        $prettyPrinter = new PrettyPrinter\Standard;
-        $traverser = new NodeTraverser;
+        $ast = $this->getAST($code);
         $visitor = new NodeVisitor($this->config["rules"], true);
-        $traverser->addVisitor(new NameResolver());
-        $traverser->addVisitor($visitor);
-        $stmts = $parser->parse($code);
-        $stmts = $traverser->traverse($stmts);
+        $stmts = $this->traverse($ast, [$visitor, new NameResolver()]);
+        $prettyPrinter = new PrettyPrinter\Standard;
         $fixedCode = $prettyPrinter->prettyPrintFile($stmts);
         $report = $visitor->getReport();
         return [$fixedCode, $report];
+    }
+
+    private function getAST($code)
+    {
+        $parser = (new ParserFactory)->create(ParserFactory::PREFER_PHP7);
+        $ast = $parser->parse($code);
+        return $ast;
+    }
+
+    private function traverse($ast, $visitors)
+    {
+        $traverser = new NodeTraverser;
+        foreach ($visitors as $visitor) {
+            $traverser->addVisitor($visitor);
+        }
+        $stmts = $traverser->traverse($ast);
+        return $stmts;
     }
 }
