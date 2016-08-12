@@ -8,9 +8,9 @@ class FileLinter
 {
     private $linter;
 
-    public function __construct()
+    public function __construct($pathToConfigFile = __DIR__ . "/config.json")
     {
-        $this->linter = new Linter();
+        $this->linter = new Linter($pathToConfigFile);
     }
 
     public function lint($path)
