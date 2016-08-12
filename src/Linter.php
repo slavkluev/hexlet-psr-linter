@@ -31,7 +31,7 @@ class Linter
         $parser = (new ParserFactory)->create(ParserFactory::PREFER_PHP7);
         $prettyPrinter = new PrettyPrinter\Standard;
         $traverser = new NodeTraverser;
-        $visitor = new NodeConverter($this->getRules());
+        $visitor = new NodeVisitor($this->getRules(), true);
         $traverser->addVisitor(new NameResolver());
         $traverser->addVisitor($visitor);
         $stmts = $parser->parse($code);
@@ -43,10 +43,9 @@ class Linter
 
     private function getRules()
     {
-        $rules = [
-            new CamelCase(),
-            new SideEffect()
-        ];
+        $json = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'config.json');
+        $config = json_decode($json, true);
+        $rules = $config["rules"];
         return $rules;
     }
 }

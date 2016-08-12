@@ -26,7 +26,7 @@ class NodeVisitorTest extends \PHPUnit_Framework_TestCase
             Error::LEVEL_ERROR,
             -1
         );
-        $this->visitor->enterNode($node);
+        $this->visitor->leaveNode($node);
 
         $this->assertEquals([$error], $this->visitor->getReport()->getErrors());
     }

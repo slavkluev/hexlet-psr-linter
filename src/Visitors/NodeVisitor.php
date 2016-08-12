@@ -8,17 +8,31 @@ use PSRLinter\Report\Report;
 
 class NodeVisitor extends NodeVisitorAbstract
 {
-    private $rules;
+    private $rules = [];
+    private $fixNodes;
 
-    public function __construct($rules)
+    public function __construct($rules, $fixNodes = false)
     {
-        $this->rules = $rules;
+        $this->fixNodes = $fixNodes;
+        foreach ($rules as $rule) {
+            $this->rules[] = new $rule();
+        }
     }
 
-    public function enterNode(Node $node)
+    public function leaveNode(Node $node)
     {
-        foreach ($this->rules as $rule) {
-            $rule->check($node);
+        if ($this->fixNodes) {
+            foreach ($this->rules as $rule) {
+                if ($rule->isFixable($node)) {
+                    return $rule->fix($node);
+                } else {
+                    $rule->check($node);
+                }
+            }
+        } else {
+            foreach ($this->rules as $rule) {
+                $rule->check($node);
+            }
         }
     }
 
