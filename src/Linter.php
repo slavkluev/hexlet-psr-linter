@@ -14,18 +14,17 @@ use PhpParser\PrettyPrinter;
 
 class Linter
 {
-    private $config;
+    private $rules;
 
-    public function __construct($pathToConfigFile = __DIR__ . "/config.json")
+    public function __construct($rules)
     {
-        $json = file_get_contents($pathToConfigFile);
-        $this->config = json_decode($json, true);
+        $this->rules = $rules;
     }
 
     public function lint($code) : Report
     {
         $ast = $this->getAST($code);
-        $visitor = new NodeVisitor($this->config["rules"]);
+        $visitor = new NodeVisitor($this->rules);
         $this->traverse($ast, [$visitor]);
         $report = $visitor->getReport();
         return $report;
@@ -34,7 +33,7 @@ class Linter
     public function fix($code)
     {
         $ast = $this->getAST($code);
-        $visitor = new NodeVisitor($this->config["rules"], true);
+        $visitor = new NodeVisitor($this->rules, true);
         $stmts = $this->traverse($ast, [$visitor, new NameResolver()]);
         $prettyPrinter = new PrettyPrinter\Standard;
         $fixedCode = $prettyPrinter->prettyPrintFile($stmts);

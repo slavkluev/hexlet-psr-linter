@@ -1,6 +1,0 @@
-{
-  "rules": [
-    "PSRLinter\\Rules\\CamelCase",
-    "PSRLinter\\Rules\\SideEffect"
-  ]
-}
