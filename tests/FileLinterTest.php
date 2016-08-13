@@ -11,7 +11,11 @@ class FileLinterTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->fileLinter = new FileLinter();
+        $rules = [
+            "PSRLinter\\Rules\\CamelCase",
+            "PSRLinter\\Rules\\SideEffect"
+        ];
+        $this->fileLinter = new FileLinter($rules);
     }
 
     public function testLintEmpty()

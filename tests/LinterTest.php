@@ -8,18 +8,29 @@ use PSRLinter\Report\Report;
 
 class LinterTest extends \PHPUnit_Framework_TestCase
 {
+    private $linter;
+
+    public function setUp()
+    {
+        $rules = [
+            "PSRLinter\\Rules\\CamelCase",
+            "PSRLinter\\Rules\\SideEffect"
+        ];
+        $this->linter = new Linter($rules);
+    }
+
     public function testNull()
     {
         $report = new Report();
 
-        $this->assertEquals($report, (new Linter())->lint(null));
+        $this->assertEquals($report, $this->linter->lint(null));
     }
 
     public function testEmptyCode()
     {
         $report = new Report();
 
-        $this->assertEquals($report, (new Linter())->lint(""));
+        $this->assertEquals($report, $this->linter->lint(""));
     }
 
     public function testLintWithGoodCode()
@@ -27,7 +38,7 @@ class LinterTest extends \PHPUnit_Framework_TestCase
         $code = '<?php $myVar = 10;';
         $report = new Report();
 
-        $this->assertEquals($report, (new Linter())->lint($code));
+        $this->assertEquals($report, $this->linter->lint($code));
     }
 
     public function testLintWithBadCode()
@@ -36,7 +47,7 @@ class LinterTest extends \PHPUnit_Framework_TestCase
         $report = new Report();
         $report->addError(new Error("my_var", "Variable name is not in camel case.", Error::LEVEL_WARNING, 1));
 
-        $this->assertEquals($report, (new Linter())->lint($code));
+        $this->assertEquals($report, $this->linter->lint($code));
     }
 
     public function testLintNotCode()
@@ -44,7 +55,7 @@ class LinterTest extends \PHPUnit_Framework_TestCase
         $code = "asdadf";
         $report = new Report();
 
-        $this->assertEquals($report, (new Linter())->lint($code));
+        $this->assertEquals($report, $this->linter->lint($code));
     }
 
     public function testFixWithGoodCode()
@@ -52,8 +63,7 @@ class LinterTest extends \PHPUnit_Framework_TestCase
         $code = '<?php $myVar = 10;';
         $expectedReport = new Report();
 
-        $linter = new Linter();
-        list($c, $report) = $linter->fix($code);
+        $report = $this->linter->fix($code)[1];
 
         $this->assertEquals($expectedReport, $report);
     }
@@ -69,8 +79,7 @@ class LinterTest extends \PHPUnit_Framework_TestCase
             1
         ));
 
-        $linter = new Linter();
-        list($c, $report) = $linter->fix($code);
+        $report = $this->linter->fix($code)[1];
 
         $this->assertEquals($expectedReport, $report);
     }

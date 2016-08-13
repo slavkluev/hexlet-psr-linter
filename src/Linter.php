@@ -14,39 +14,47 @@ use PhpParser\PrettyPrinter;
 
 class Linter
 {
+    private $rules;
+
+    public function __construct($rules)
+    {
+        $this->rules = $rules;
+    }
+
     public function lint($code) : Report
     {
-        $parser = (new ParserFactory)->create(ParserFactory::PREFER_PHP7);
-        $traverser = new NodeTraverser;
-        $visitor = new NodeVisitor($this->getRules());
-        $traverser->addVisitor($visitor);
-        $stmts = $parser->parse($code);
-        $traverser->traverse($stmts);
+        $ast = $this->getAST($code);
+        $visitor = new NodeVisitor($this->rules);
+        $this->traverse($ast, [$visitor]);
         $report = $visitor->getReport();
         return $report;
     }
 
     public function fix($code)
     {
-        $parser = (new ParserFactory)->create(ParserFactory::PREFER_PHP7);
+        $ast = $this->getAST($code);
+        $visitor = new NodeVisitor($this->rules, true);
+        $stmts = $this->traverse($ast, [$visitor, new NameResolver()]);
         $prettyPrinter = new PrettyPrinter\Standard;
-        $traverser = new NodeTraverser;
-        $visitor = new NodeConverter($this->getRules());
-        $traverser->addVisitor(new NameResolver());
-        $traverser->addVisitor($visitor);
-        $stmts = $parser->parse($code);
-        $stmts = $traverser->traverse($stmts);
         $fixedCode = $prettyPrinter->prettyPrintFile($stmts);
         $report = $visitor->getReport();
         return [$fixedCode, $report];
     }
 
-    private function getRules()
+    private function getAST($code)
     {
-        $rules = [
-            new CamelCase(),
-            new SideEffect()
-        ];
-        return $rules;
+        $parser = (new ParserFactory)->create(ParserFactory::PREFER_PHP7);
+        $ast = $parser->parse($code);
+        return $ast;
+    }
+
+    private function traverse($ast, $visitors)
+    {
+        $traverser = new NodeTraverser;
+        foreach ($visitors as $visitor) {
+            $traverser->addVisitor($visitor);
+        }
+        $stmts = $traverser->traverse($ast);
+        return $stmts;
     }
 }

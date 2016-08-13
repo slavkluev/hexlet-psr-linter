@@ -8,9 +8,9 @@ class FileLinter
 {
     private $linter;
 
-    public function __construct()
+    public function __construct($rules)
     {
-        $this->linter = new Linter();
+        $this->linter = new Linter($rules);
     }
 
     public function lint($path)

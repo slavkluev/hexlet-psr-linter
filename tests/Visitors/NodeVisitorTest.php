@@ -13,7 +13,7 @@ class NodeVisitorTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $rules = [new CamelCase()];
+        $rules = ["PSRLinter\\Rules\\CamelCase"];
         $this->visitor = new NodeVisitor($rules);
     }
 
@@ -26,7 +26,7 @@ class NodeVisitorTest extends \PHPUnit_Framework_TestCase
             Error::LEVEL_ERROR,
             -1
         );
-        $this->visitor->enterNode($node);
+        $this->visitor->leaveNode($node);
 
         $this->assertEquals([$error], $this->visitor->getReport()->getErrors());
     }

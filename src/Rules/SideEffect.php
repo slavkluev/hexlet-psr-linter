@@ -15,6 +15,7 @@ class SideEffect implements RuleInterface
     private $sideEffect = [
         "Expr_FuncCall",
         "Expr_Include",
+        "Expr_Variable",
         "Stmt_Echo"
     ];
     private $statementNodeFlag = false;

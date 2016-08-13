@@ -2,8 +2,6 @@
 
 namespace PSRLinter\Tests\Fixtures;
 
-$myVar = 1;
-
 class Good {
 
     private $myVar;

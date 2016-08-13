@@ -33,7 +33,11 @@ $fix = $cmd['fix'];
 
 $cli = new CLImate();
 try {
-    $linter = new FileLinter();
+    $rules = [
+        "PSRLinter\\Rules\\CamelCase",
+        "PSRLinter\\Rules\\SideEffect"
+    ];
+    $linter = new FileLinter($rules);
     $reporter = new ReportBuilder($format);
     $reports = $fix ? $linter->fix($path) : $linter->lint($path);
     $cli->out($reporter->build($reports));
