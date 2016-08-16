@@ -21,18 +21,11 @@ class NodeVisitor extends NodeVisitorAbstract
 
     public function leaveNode(Node $node)
     {
-        if ($this->fixNodes) {
-            foreach ($this->rules as $rule) {
-                if ($rule->isFixable($node)) {
-                    return $rule->fix($node);
-                } else {
-                    $rule->check($node);
-                }
+        foreach ($this->rules as $rule) {
+            if ($this->fixNodes && $rule->isFixable($node)) {
+                return $rule->fix($node);
             }
-        } else {
-            foreach ($this->rules as $rule) {
-                $rule->check($node);
-            }
+            $rule->check($node);
         }
     }
 

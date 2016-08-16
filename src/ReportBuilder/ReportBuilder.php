@@ -23,6 +23,9 @@ class ReportBuilder
 
     public function build($reports)
     {
+        if ($reports == null) {
+            return null;
+        }
         return $this->reporter->build($reports);
     }
 }

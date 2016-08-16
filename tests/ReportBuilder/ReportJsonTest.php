@@ -8,13 +8,6 @@ use PSRLinter\ReportBuilder\ReportJson;
 
 class ReportJsonTest extends \PHPUnit_Framework_TestCase
 {
-    public function testEmpty()
-    {
-        $reportJson = new ReportJson();
-
-        $this->assertEquals(null, $reportJson->build(""));
-    }
-
     public function testOneReport()
     {
         $report = new Report();

@@ -9,10 +9,6 @@ class ReportTxt implements ReportTypeInterface
 {
     public function build($reports)
     {
-        if ($reports == null) {
-            return null;
-        }
-
         $result = [];
         foreach ($reports as $file => $report) {
             $item = [];

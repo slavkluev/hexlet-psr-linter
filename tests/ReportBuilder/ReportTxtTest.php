@@ -8,13 +8,6 @@ use PSRLinter\ReportBuilder\ReportTxt;
 
 class ReportTxtTest extends \PHPUnit_Framework_TestCase
 {
-    public function testEmpty()
-    {
-        $reportTxt = new ReportTxt();
-
-        $this->assertEquals(null, $reportTxt->build(""));
-    }
-
     public function testOneReport()
     {
         $report = new Report();
