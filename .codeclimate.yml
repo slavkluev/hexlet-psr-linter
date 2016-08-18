@@ -10,4 +10,4 @@ engines:
     enabled: true
 ratings:
    paths:
-   - "src/*"
+   - src/**

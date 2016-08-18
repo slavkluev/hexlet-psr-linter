@@ -38,18 +38,17 @@ class ReportTxt implements ReportTypeInterface
 
     private function buildSummary(Report $report)
     {
-        $countOfErrors = $report->getCountOfErrors();
-        $countOfWarnings = $report->getCountOfWarnings();
         $countOfProblems = $report->getCountOfProblems();
         if ($countOfProblems == 0) {
             return "Problems have not been detected.";
-        } else {
-            return sprintf(
-                "%d problems (%d errors, %d warnings)",
-                $countOfProblems,
-                $countOfErrors,
-                $countOfWarnings
-            );
         }
+        $countOfErrors = $report->getCountOfErrors();
+        $countOfWarnings = $report->getCountOfWarnings();
+        return sprintf(
+            "%d problems (%d errors, %d warnings)",
+            $countOfProblems,
+            $countOfErrors,
+            $countOfWarnings
+        );
     }
 }
