@@ -29,11 +29,9 @@ class Report
     {
         if ($error1->getLine() < $error2->getLine()) {
             return -1;
-        }
-        elseif ($error1->getLine() > $error2->getLine()) {
+        } elseif ($error1->getLine() > $error2->getLine()) {
             return 1;
-        }
-        else {
+        } else {
             return 0;
         }
     }
