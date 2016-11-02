@@ -5,12 +5,9 @@ namespace PSRLinter;
 use PhpParser\NodeTraverser;
 use PhpParser\NodeVisitor\NameResolver;
 use PhpParser\ParserFactory;
-use PSRLinter\Rules\CamelCase;
-use PSRLinter\Rules\SideEffect;
-use PSRLinter\Visitors\NodeConverter;
-use PSRLinter\Visitors\NodeVisitor;
-use PSRLinter\Report\Report;
 use PhpParser\PrettyPrinter;
+use PSRLinter\Report\Report;
+use PSRLinter\Visitors\NodeVisitor;
 
 class Linter
 {
