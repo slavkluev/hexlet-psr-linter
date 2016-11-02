@@ -27,12 +27,9 @@ class Report
 
     private function lineSort(Error $error1, Error $error2)
     {
-        if ($error1->getLine() < $error2->getLine())
-            return -1;
-        elseif ($error1->getLine() > $error2->getLine())
-            return 1;
-        else
-            return 0;
+        if ($error1->getLine() < $error2->getLine()) return -1;
+        elseif ($error1->getLine() > $error2->getLine()) return 1;
+        else return 0;
     }
 
     public function getErrors(): array
